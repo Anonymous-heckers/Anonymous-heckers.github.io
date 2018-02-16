@@ -1,77 +1,93 @@
-<h1>Quiz on Important Math</h1>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+</head>
+<body ng-app>
+<h1>{{name}} : Quiz on Algebra 2</h1>
+<input type='text' ng-model='name' id='sub'/>
+
+</body>
 <div class="quiz-container">
   <div id="quiz"></div>
 </div>
+<div id="buttons">
 <button id="previous">Previous Question</button>
 <button id="next">Next Question</button>
 <button id="submit">Submit Quiz</button>
 <button id="explain">Explanations</button>
 <button id="reset">Reset Quiz</button>
+</div>
 <div id="results"></div>
 
 <script>
 (function quiz() {
+
   const myQuestions = [
 	{
-	  question: "1.What equation should be used to verticaly move the line up 2 *graph 1*",
+	  question: "Simplify √(48a^2b^2)",
+	  image:"https://www.rd.com/wp-content/uploads/2017/09/01-Can-You-Pass-This-Elementary-School-Math-Test--760x506.jpg",
 	  answers: {
-		a: "√(x)+2",
-		b: "√(x)-2",
-		c: "√(x+2)",
-		d: "√(x-2)"
+	 a: "4ab√3",
+	 b: "2ab√6",
+	 c: "2ab√3",
+	 d: "4ab√6"
 	  },
 	  correctAnswer: "a"
 	},
-	{
-	  question: "2. What is the equation that represents the line*graph 2*",
+  {
+	  question: "Simplify √(52a^3b^4)",
+	  image:"https://www.rd.com/wp-content/uploads/2017/09/01-Can-You-Pass-This-Elementary-School-Math-Test--760x506.jpg",
 	  answers: {
-		a: "√(x+2)+5",
-		b: "√(x-2)+5",
-		c: "√(x+5)-2",
-		d: "√(x-5)+2"
+	  a: "2a2b√13a",
+	  b: "2ab^2√13a",
+	  c: "13ab^2√2a",
+	  d: "13a2b√2a"
 	  },
 	  correctAnswer: "b"
 	},
 	{
-	  question: "3. Simplify √x^16 x y^4/ y^4",
+	  question: "Solve √(-2x+8) + 4 = x",
+	  image:"https://d5lq1fn667whc.cloudfront.net/resize?url=https%3A%2F%2Fmusicglue-user-app-p-4-p.s3.amazonaws.com%2Foriginals%2F3e199e90-6ebe-0134-531c-3a24bef164a6&height=1200&mode=fit&width=1200",
 	  answers: {
-		a: "1",
-		b: "x^4",
-		c: "y^4",
-		d: "All of the above"
+	  a: "X = 4, X = 2",
+	  b: "X ≠ 4, X = 2",
+	  c: "X ≠ 4, X ≠ 2",
+	  d: "X = 4, X ≠ 2"
 	  },
 	  correctAnswer: "b"
 	},
 	{
-	  question: "4. Simplify √(x^2+y^4+9)",
+	question: "Solve √(-3x+18) + 6 = x",
+	  image:"https://d5lq1fn667whc.cloudfront.net/resize?url=https%3A%2F%2Fmusicglue-user-app-p-4-p.s3.amazonaws.com%2Foriginals%2F3e199e90-6ebe-0134-531c-3a24bef164a6&height=1200&mode=fit&width=1200",
 	  answers: {
-		a: "x+y^2-3",
-		b: "y^2+x+3",
-		c: "x^2+y-3",
-		d: "x^2+y+3"
+	  a: "X = 6, X = 3",
+	  b: "X ≠ 6, X = 3",
+	  c: "X ≠ 6, X ≠ 3",
+	  d: "X = 6, X ≠ 3"
 	  },
 	  correctAnswer: "b"
 	},
 	{
-	  question: "5. X-6 = √x Which is the extraneous solution?",
+	question: "Which function graphs the lone below?",
+	  image:"Anonymous-heckers.github.io/057E16DB-C8C2-483C-9432-D65357D47A5B.jpeg",
 	  answers: {
-		a: "4",
-		b: "9",
-		c: "Both",
-		d: "Neither"
+	  a: "X = 6, X = 3",
+	  b: "X ≠ 6, X = 3",
+	  c: "X ≠ 6, X ≠ 3",
+	  d: "X = 6, X ≠ 3"
 	  },
-	  correctAnswer: "a"
+	  correctAnswer: "b"
 	},
 	{
-	  question: "6. √(x+7)-7=x Which is the solution?",
+	question: "Which function graphs the line below?",
+	  image:"https://d5lq1fn667whc.cloudfront.net/resize?url=https%3A%2F%2Fmusicglue-user-app-p-4-p.s3.amazonaws.com%2Foriginals%2F3e199e90-6ebe-0134-531c-3a24bef164a6&height=1200&mode=fit&width=1200",
 	  answers: {
-		a: "-7",
-		b: "-6",
-		c: "Both",
-		d: "Neither"
+	  a: "X = 6, X = 3",
+	  b: "X ≠ 6, X = 3",
+	  c: "X ≠ 6, X ≠ 3",
+	  d: "X = 6, X ≠ 3"
 	  },
-	  correctAnswer: "d"
-	},
+	  correctAnswer: "b"
+	}
 
   ];
 
@@ -81,6 +97,11 @@
 
 	// for each question...
 	myQuestions.forEach((currentQuestion, questionNumber) => {
+	
+		const image = [];
+		
+
+	
 	  // we'll want to store the list of answer choices
 	  const answers = [];
 
@@ -100,6 +121,7 @@
 	  output.push(
 		`<div class="slide">
 		   <div class="question"> ${currentQuestion.question} </div>
+		   <div class="image"><img src=${currentQuestion.image}></div>
 		   <div class="answers"> ${answers.join("")} </div>
 		 </div>`
 	  );
@@ -143,7 +165,7 @@
 function explanation(){
 if (window.confirm('click "Ok" for explanations.')) 
 {
-window.location.href= 'https://Ethans-Group.github.io/Explanations.html';
+window.location.href='https://www.google.com';
 };
 }
 
@@ -154,8 +176,10 @@ window.location.href= 'https://Ethans-Group.github.io/Explanations.html';
 	
 	if (currentSlide === 0) {
 	  previousButton.style.display = "none";
+	  document.getElementById('sub').style.display = "inline-block";
 	} else {
 	  previousButton.style.display = "inline-block";
+	  document.getElementById('sub').style.display = "none";
 	}
 	
 	if (currentSlide === slides.length - 1) {
@@ -200,9 +224,8 @@ window.location.href= 'https://Ethans-Group.github.io/Explanations.html';
   // on submit, show results
   submitButton.addEventListener("click", showResults);
   nextButton.addEventListener("click", showNextSlide);
-
-  previousButton.addEventListener("click", showPreviousSlide);
   explainButton.addEventListener("click", explanation);
+  previousButton.addEventListener("click", showPreviousSlide);
   resetButton.addEventListener("click", resetQuiz);
   
   function resetQuiz(){
@@ -216,34 +239,23 @@ window.location.href= 'https://Ethans-Group.github.io/Explanations.html';
   
 })();
 </script>
-<h2>Graph 1</h2>
-<img src=
-"https://www.varsitytutors.com/assets/vt-hotmath-legacy/hotmath_help/topics/graphing-square-root-functions/graph-1.gif"
-style="width:500"/>
-<h3> *Use Image For Question 1 </h3>
-<h2>Graph 2</h2>
-<img src=
-"https://dr282zn36sxxg.cloudfront.net/datastreams/f-d%3Ae9c59e75c5710a1299b81b2f1070028ec47a80746e048065e319c73a%2BIMAGE_TINY%2BIMAGE_TINY.1"
-style="width:500"/>
-<h3>*Use Image For Question 2</h3>
-
 <style>
 @import url(https://fonts.googleapis.com/css?family=Work+Sans:300,600);
 
 body{
 	font-size: 20px;
-	font-family: 'Trebuchet MS', sans-serif;
+	font-family: 'Work Sans', sans-serif;
 	color: #333;
   font-weight: 300;
   text-align: center;
-  background-color: lightgray;
+  background-color: #f8f6f0;
 }
 h1{
-  font-weight: 200;
+  font-weight: 300;
   margin: 0px;
-  padding: 15px;
-  font-size: 25px;
-  background-color: crimson;
+  padding: 10px;
+  font-size: 20px;
+  background-color: blue;
   color: #fff;
 }
 .question{
@@ -251,31 +263,32 @@ h1{
   margin-bottom: 10px;
 }
 .answers {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   text-align: left;
   display: inline-block;
 }
 .answers label{
   display: block;
-  margin-bottom: 13px;
+  margin-bottom: 10px;
 }
 button{
-  font-family: 'arial', sans-serif;
+  font-family: 'Work Sans', sans-serif;
 	font-size: 22px;
-	background-color: green;
+	background-color: #279;
 	color: #fff;
-	border: 0px;
-	border-radius: 5px;
-	padding: 25px;
+	border: 1px;
+	border-radius: 3px;
+	padding: 30px;
 	cursor: pointer;
-	margin-bottom: 50px;
-	margin-top: 20px;
+	margin-bottom: 10px;
 }
 button:hover{
-	background-color: green;
+	background-color: #38a;
 }
 
-
+#buttons{
+	margin-top:200px;
+}
 
 
 
@@ -296,5 +309,10 @@ button:hover{
   position: relative;
   height: 200px;
   margin-top: 40px;
+}
+img{
+width:20%;
+height:100%;
+border:0px;
 }
 </style>
