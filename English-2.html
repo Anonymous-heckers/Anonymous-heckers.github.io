@@ -1,87 +1,107 @@
-<h1>Quiz on English 2</h1>
+<!-- Created by <!—JLow —> -->
+
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+</head>
+<body ng-app>
+<h1>{{name}}: Quiz on English</h1>
+<input type='text' ng-model='name' id='sub'/>
+
+</body>
 <div class="quiz-container">
   <div id="quiz"></div>
 </div>
+<div id="buttons">
 <button id="previous">Previous Question</button>
 <button id="next">Next Question</button>
 <button id="submit">Submit Quiz</button>
 <button id="explain">Explanations</button>
 <button id="reset">Reset Quiz</button>
+</div>
 <div id="results"></div>
 
 <script>
 (function quiz() {
+
   const myQuestions = [
 	{
-	  question: "1. Which example is a complete sentence",
+	  question: "Which of the following sentences is complete?",
+	  image:"https://sd.keepcalm-o-matic.co.uk/i/keep-calm-and-use-complete-sentences.png",
 	  answers: {
-	  a: "In the car.",
-	b: "Running in the woods.",
-	c: "At the party.",
-	d: "The dog has fur."
- 
-			  },
+		a: "Eating a hearty meal in the morning.",
+		b: "To apply for a job at the new store.",
+		c: "Many of his friends coming back three or four times over the summer.",
+		d: "Finding a parking space is usually easy during the week."
+	  },
+	  correctAnswer: "d"
+	},
+  {
+	  question: "Which of these sentences is a fragment?",
+	  image:"https://writingexplained.org/wp-content/uploads/Fragment-sentence.png",
+	  answers: {
+		a: "He made very few friends.",
+		b: "Quinn didn’t do it.",
+		c: "A man who was big.",
+		d: "Why are they over there?"
+	  },
+	  correctAnswer: "c"
+	},
+	{
+	  question: "Which of the following questions contains a comma splice?",
+	  image:"http://blogs.longwood.edu/cummingsgm/files/2014/11/keep-calm-and-avoid-comma-splices-4.png",
+	  answers: {
+		a: "Quinn drove to the mall, but it was closed",
+		b: "When I went running, I saw Quinn",
+		c: "Surprisingly, I saw a duck when I went running",
+		d: "Our teacher reviewed for the test in class, we went to the library afterwards to study."
+	  },
 	  correctAnswer: "d"
 	},
 	{
-	  question: "Which is NOT a complete complex sentence?",
+	  question: "Which of the following sentences incorrectly uses a semicolon?",
+	  image:"https://temporarytattoos.com/pub/media/catalog/product/cache/image/700x560/e9c3970ab036de70892d86c6d221abfe/s/e/semicolon-tattoo-my-story-isnt-over_5512.jpg",
 	  answers: {
-		a: "When the cake is brown, take it out of the oven", 
-	 b: "The students are studying because they have a test tomorrow", 
-	 c: "He wanted to go to the football game even though it was raining",
-	 d: "Although I got tired, I still cheered for my teammates",
-
-	  		},
-	  	correctAnswer: "d"
+		a: "John was the first to cross the finish line; Daniel couldn’t find it.",
+		b: "Quinn lost his money; every single penny.",
+		c: "We can go to the museum; it’s pretty quiet there.",
+		d: "I have a big test tomorrow; I can't go out tonight."
+	  },
+	  correctAnswer: "b"
 	},
 	{
-	  question: "Which sentence correctly uses a semicolon?",
+	  question: "Which of the following sentences incorrectly uses a colon?",
+	  image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDKQmgvQqA1oTodPUFjnS_x8QoQW4TOrdoj17la0ymJ0Nmw5pFVA",
 	  answers: {
-		a: "The cake was good; and the cake was cheap",
-		b: "The cake was good; it was cheap",
-		c: "The cake was good; the cake was also cheap",
-		d: "The cake was good;"
-	  },
-	  correctAnswer: "c"
-	},
-	{
-	  question: "Which sentence contains the incorrect use of a colon?",
-	  answers: {
-		a: "Kenny said:”john, he is my representative.”",
-		b: "I asked Kenny who was his representatives. He wrote down John, Carson, and Joe ",
-		c: "I asked Kenny is the stroganoff good: and he said no"
-	  },
+		a: "It is 11:35 a.m.",
+		b: "I have very little time to study: my job starts in eight days.",
+		c: "his writing was brilliant: clear, concise, and correct.",
+		d: "I need to get these items: bread, milk, and cheese.",
+		},
 	  correctAnswer: "c"
 	},
 	{
-	  question: "Which sentence contains incorrect subject verb agreement?",
+	  question: "Which verb correctly fits the following sentence: My Friend ______ Soccer yesterday.",
+	  image:"http://res.freestockphotos.biz/pictures/15/15872-illustration-of-a-soccer-ball-pv.png",
 	  answers: {
-		a: "The policeman along with the firemen filled out paperwork",
-		b: "The can, one of a dozen, sits in the fridge",
-		c: "Along with the policeman the fireman collectes the witnesses an hour ago"
+		a: "play",
+		b: "played",
+		c: "playing",
+		d: "plays"
 	  },
-	  correctAnswer: "c"
+	  correctAnswer: "b"
 	},
-{
-	  question: "Which sentence contains correct subject verb agreement?",
+		{
+	  question: "Identify the intervening word(s): His Family, as well as his friends, want him to leave.",
+	  image:"https://sd.keepcalm-o-matic.co.uk/i-w600/keep-calm-and-watch-out-for-intervening-words-4.jpg",
 	  answers: {
-		a: "Pat is went to the store",
-		b: "The dog is barking an hour ago",
-		c: "The dog along with the cats, were living in harmony"
+		a: "As well as",
+		b: "Want him",
+		c: "Leave",
+		d: "his family"
 	  },
-	  correctAnswer: "c"
+	  correctAnswer: "a"
 	},
-{
-	  question: "Which sentence does not contain a comma splice?",
-	  answers: {
-		a: "I didn’t like the concert, it was too loud",
-		b: "We went to the race, the cars were really loud",
-		c: "The car looked really cool, and it was for sale",
-		d: "I didn’t like the ride, the seats were too hard"
-	  },
-	  correctAnswer: "c"
-	},
-
+	
   ];
 
   function buildQuiz() {
@@ -90,6 +110,11 @@
 
 	// for each question...
 	myQuestions.forEach((currentQuestion, questionNumber) => {
+	
+		const image = [];
+		
+
+	
 	  // we'll want to store the list of answer choices
 	  const answers = [];
 
@@ -109,6 +134,7 @@
 	  output.push(
 		`<div class="slide">
 		   <div class="question"> ${currentQuestion.question} </div>
+		   <div class="image"><img src=${currentQuestion.image}></div>
 		   <div class="answers"> ${answers.join("")} </div>
 		 </div>`
 	  );
@@ -152,7 +178,7 @@
 function explanation(){
 if (window.confirm('click "Ok" for explanations.')) 
 {
-window.location.href='https://https://Ethans-Group.github.io/Explanations.html';
+window.location.href='https://www.google.com';
 };
 }
 
@@ -163,8 +189,10 @@ window.location.href='https://https://Ethans-Group.github.io/Explanations.html';
 	
 	if (currentSlide === 0) {
 	  previousButton.style.display = "none";
+	  document.getElementById('sub').style.display = "inline-block";
 	} else {
 	  previousButton.style.display = "inline-block";
+	  document.getElementById('sub').style.display = "none";
 	}
 	
 	if (currentSlide === slides.length - 1) {
@@ -209,9 +237,8 @@ window.location.href='https://https://Ethans-Group.github.io/Explanations.html';
   // on submit, show results
   submitButton.addEventListener("click", showResults);
   nextButton.addEventListener("click", showNextSlide);
-
-  previousButton.addEventListener("click", showPreviousSlide);
   explainButton.addEventListener("click", explanation);
+  previousButton.addEventListener("click", showPreviousSlide);
   resetButton.addEventListener("click", resetQuiz);
   
   function resetQuiz(){
@@ -230,18 +257,18 @@ window.location.href='https://https://Ethans-Group.github.io/Explanations.html';
 
 body{
 	font-size: 20px;
-	font-family: 'Trebuchet MS', sans-serif;
+	font-family: 'Work Sans', sans-serif;
 	color: #333;
   font-weight: 300;
   text-align: center;
-  background-color: lightgray;
+  background-color: #f8f6f0;
 }
 h1{
-  font-weight: 200;
+  font-weight: 300;
   margin: 0px;
-  padding: 15px;
-  font-size: 25px;
-  background-color: darkgreen;
+  padding: 10px;
+  font-size: 20px;
+  background-color: green;
   color: #fff;
 }
 .question{
@@ -255,24 +282,26 @@ h1{
 }
 .answers label{
   display: block;
-  margin-bottom: 13px;
+  margin-bottom: 10px;
 }
 button{
-  font-family: 'arial', sans-serif;
+  font-family: 'Work Sans', sans-serif;
 	font-size: 22px;
-	background-color: green;
+	background-color: #279;
 	color: #fff;
-	border: 0px;
-	border-radius: 5px;
-	padding: 15px;
+	border: 1px;
+	border-radius: 3px;
+	padding: 30px;
 	cursor: pointer;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 }
 button:hover{
-	background-color: green;
+	background-color: #38a;
 }
 
-
+#buttons{
+	margin-top:200px;
+}
 
 
 
@@ -293,5 +322,10 @@ button:hover{
   position: relative;
   height: 200px;
   margin-top: 40px;
+}
+img{
+width:20%;
+height:100%;
+border:0px;
 }
 </style>
