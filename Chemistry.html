@@ -1,78 +1,73 @@
-<h1>Quiz on Important Chemistry</h1>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+</head>
+<body ng-app>
+<h1>{{name}}: Quiz on Chemistry</h1>
+<input type='text' ng-model='name' id='sub'/>
+
+</body>
 <div class="quiz-container">
   <div id="quiz"></div>
 </div>
+<div id="buttons">
 <button id="previous">Previous Question</button>
 <button id="next">Next Question</button>
 <button id="submit">Submit Quiz</button>
-<button id="explain">Explanations</button>
 <button id="reset">Reset Quiz</button>
+</div>
 <div id="results"></div>
 
 <script>
 (function quiz() {
   const myQuestions = [
 	{
-	  question: "1. What type of atom model is the shown diagram?",
+	  question: "Which model shows the electrons in atoms in orbits of differing energy around the nucleus?",
+	  image:"",
 	  answers: {
-		a: "Bohr",
-		b: "Rutherford",
-		c: "Quantum Mechanical",
-		d: "Atomic"
+		a: "Quantum model",
+		b: "Box and whisker plot",
+		c: "Plum pudding model",
+		d: "Borh Model"
 	  },
-	  correctAnswer: "a"
+	  correctAnswer: "d",
+	  explanation: "d is correct"
 	},
 	{
-	  question: "2. What is shown in the picture?",
+	  question: "Generally as the atomic number of an element increases the atomic weight:",
+	  image:"https://sciencenotes.org/printable-periodic-table/",
 	  answers: {
-		a: "Mixture",
-		b: "Compound",
-		c: "Element",
-		d: "DNA"
+		a: "Increase",
+		b: "Is the same as the atomic number",
+		c: "Increase",
+		d: "fluctuates"
 	  },
-	  correctAnswer: "b"
+	  correctAnswer: "c",
+	  explanation: "C is correct"
 	},
-	{
-	  question: "3. Based on periodic table trends which element has the most electronegativity?",
+  {
+	  question: "What is an ion?",
+	  image:"",
 	  answers: {
-		a: "F",
-		b: "Au",
-		c: "Rb",
-		d: "Ac"
+		a: "An element that appears red on the periodic table of one or more electrons",
+		b: "An atom or molecule with a net electric charge due to the loss or gain ",
+		c: "An element that is colored blue on the periodic table",
+		d: "An atom that has a different number of protons than is stated on the periodic table"
 	  },
-	  correctAnswer: "a"
+	  correctAnswer: "a",
+	  explanation: "A is correct"
 	},
-	{
-	  question: "4. Based on periodic table trends which element has the largest atomic size?",
+  {
+	  question: "The following image is an example of:",
+	  image:"https://ejdio.weebly.com/atomic-science.html",
 	  answers: {
-		a: "He",
-		b: "Te",
-		c: "Sc",
-		d: "La"
+		a: "An element",
+		b: "A mixture",
+		c: "A compound",
+		d: "Not real"
 	  },
-	  correctAnswer: "d"
-	},
-	{
-	  question: "5. What is being shown?",
-	  answers: {
-		a: "Compound",
-		b: "Element",
-		c: "Mixture",
-		d: "Equilateral"
-	  },
-	  correctAnswer: "c"
-	},
-	{
-	  question: "6. What type of model is shown?",
-	  answers: {
-		a: "Bohr",
-		b: "Rutherford",
-		c: "Quantum Mechanical",
-		d: "Atomic"
-	  },
-	  correctAnswer: "b"
-	},
-
+	  correctAnswer: "a",
+	  explanation: "A is correct"
+	}
   ];
 
   function buildQuiz() {
@@ -81,6 +76,12 @@
 
 	// for each question...
 	myQuestions.forEach((currentQuestion, questionNumber) => {
+	
+		const image = [];
+		const explanation = [];
+		
+
+	
 	  // we'll want to store the list of answer choices
 	  const answers = [];
 
@@ -96,11 +97,13 @@
 		);
 	  }
 
-	  // add this question and its answers to the output
+	  // add this question, image and its answers to the output
 	  output.push(
 		`<div class="slide">
 		   <div class="question"> ${currentQuestion.question} </div>
+		   <div class="image"><img src=${currentQuestion.image}></div>
 		   <div class="answers"> ${answers.join("")} </div>
+		   <div class="explanation"> ${currentQuestion.explanation}</div>
 		 </div>`
 	  );
 	});
@@ -108,7 +111,7 @@
 	// finally combine our output list into one string of HTML and put it on the page
 	quizContainer.innerHTML = output.join("");
   }
-
+	
   function showResults() {
 	// gather answer containers from our quiz
 	const answerContainers = quizContainer.querySelectorAll(".answers");
@@ -140,12 +143,6 @@
 	resultsContainer.innerHTML = `${numCorrect} out of ${myQuestions.length}`;
 }
 
-function explanation(){
-if (window.confirm('click "Ok" for explanations.')) 
-{
-window.location.href='https://Ethans-Group.github.io/Explanations.html';
-};
-}
 
   function showSlide(n) {
 	slides[currentSlide].classList.remove("active-slide");
@@ -154,8 +151,10 @@ window.location.href='https://Ethans-Group.github.io/Explanations.html';
 	
 	if (currentSlide === 0) {
 	  previousButton.style.display = "none";
+	  document.getElementById('sub').style.display = "inline-block";
 	} else {
 	  previousButton.style.display = "inline-block";
+	  document.getElementById('sub').style.display = "none";
 	}
 	
 	if (currentSlide === slides.length - 1) {
@@ -167,10 +166,8 @@ window.location.href='https://Ethans-Group.github.io/Explanations.html';
 	}
 	if (currentSlide === slides.length - 1) {
 	  resetButton.style.display = "inline-block";
-		explainButton.style.display = "inline-block";
 	} else {
 	  resetButton.style.display = "none";
-		explainButton.style.display = "none";
 	}
 
   }
@@ -191,7 +188,6 @@ window.location.href='https://Ethans-Group.github.io/Explanations.html';
 
   const previousButton = document.getElementById("previous");
   const nextButton = document.getElementById("next");
-  const explainButton = document.getElementById("explain");
   const slides = document.querySelectorAll(".slide");
   let currentSlide = 0;
 
@@ -200,9 +196,7 @@ window.location.href='https://Ethans-Group.github.io/Explanations.html';
   // on submit, show results
   submitButton.addEventListener("click", showResults);
   nextButton.addEventListener("click", showNextSlide);
-
   previousButton.addEventListener("click", showPreviousSlide);
-  explainButton.addEventListener("click", explanation);
   resetButton.addEventListener("click", resetQuiz);
   
   function resetQuiz(){
@@ -216,26 +210,6 @@ window.location.href='https://Ethans-Group.github.io/Explanations.html';
   
 })();
 </script>
-<p>Figure 1 Question 1</p>
-<img src=
-"https://sites.google.com/site/thomsonsexperiment/_/rsrc/1258075844452/thomson-s-model-vs-modern-model/400px-ChadwicksModel.png?height=198&width=320"
-style="width:500"/>
-<p>Figure 2 Question 2</p>
-<img src=
-"http://www.ivyroses.com/Chemistry/Images/Compound_Molecules_IvyRosecouk150.jpg"
-style="width:500"/>
-<p>Figure 3 Question 3-4</p>
-<img src=
-"https://www.popsci.com/sites/popsci.com/files/styles/655_1x_/public/periodic_table_large.jpg?itok=VZkF69_Z"
-style="width:500"/>
-<p>Figure 4 Question 5</p>
-<img src=
-"http://www.ivyroses.com/Chemistry/Images/Mixture_Molecules-of-Elements_IvyRosecouk150.jpg"
-style="width:500"/>
-<p>Figure 5 Question 6</p>
-<img src=
-"http://www.ducksters.com/science/atom.gif"
-style="width:500"/>
 <style>
 @import url(https://fonts.googleapis.com/css?family=Work+Sans:300,600);
 
@@ -273,18 +247,19 @@ button{
 	font-size: 22px;
 	background-color: #279;
 	color: #fff;
-	border: 0px;
+	border: 1px;
 	border-radius: 3px;
-	padding: 20px;
+	padding: 30px;
 	cursor: pointer;
-	margin-bottom: 20px;
-	margin-top: 20px;
+	margin-bottom: 10px;
 }
 button:hover{
 	background-color: #38a;
 }
 
-
+#buttons{
+	margin-top:220px;
+}
 
 
 
@@ -305,5 +280,14 @@ button:hover{
   position: relative;
   height: 200px;
   margin-top: 40px;
+}
+img{
+width:20%;
+height:100%;
+border:0px;
+}
+.explanation{
+font-size: 30px;
+display:none;
 }
 </style>
